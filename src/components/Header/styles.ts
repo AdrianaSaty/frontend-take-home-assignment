@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { mediaQuery } from '../../utils';
+import { mediaQuery, themeColors } from '../../globalStyles';
+
+export const Container = styled.div`
+  background-color: ${themeColors.white};
+`;
 
 export const HeaderLogo = styled.img`
   margin: 16px;
