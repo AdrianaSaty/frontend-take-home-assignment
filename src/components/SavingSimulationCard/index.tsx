@@ -40,23 +40,15 @@ const SavingSimulationCard: React.FunctionComponent = () => {
   };
 
   const handleMonthChange = (addMonth: number) => {
-    const anoAtual = startDate.getFullYear();
-    const mesAtual = startDate.getMonth();
-    const anoSelecionado = selectedDate.getFullYear();
-    const mesSelecionado = selectedDate.getMonth();
-    if (
-      (anoSelecionado >= anoAtual &&
-        mesSelecionado >= mesAtual &&
-        addMonth > 0) ||
-      (anoSelecionado > anoAtual && addMonth > 0)
-    ) {
+    const selectedDateInDays = Math.floor(
+      selectedDate.getTime() / (1000 * 60 * 60 * 24)
+    );
+    const startDateInDays = Math.floor(
+      startDate.getTime() / (1000 * 60 * 60 * 24)
+    );
+    if (selectedDateInDays >= startDateInDays && addMonth > 0) {
       selectedDate.setMonth(selectedDate.getMonth() + 1);
-    } else if (
-      (anoSelecionado >= anoAtual &&
-        mesSelecionado > mesAtual &&
-        addMonth < 0) ||
-      (anoSelecionado > anoAtual && addMonth < 0)
-    ) {
+    } else if (selectedDateInDays > startDateInDays && addMonth < 0) {
       selectedDate.setMonth(selectedDate.getMonth() - 1);
     }
     handleSelectedDate(selectedDate);
