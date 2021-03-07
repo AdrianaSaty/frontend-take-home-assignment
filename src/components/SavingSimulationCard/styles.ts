@@ -6,9 +6,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const Container = styled.div`
   background-color: ${themeColors.white};
   width: 100%;
-  padding: 31px 24px 40px 24px;
+  padding: 24px 24px 40px 24px;
   ${mediaQuery.sm} {
-    width: 530px;
+    padding: 35px 40px 40px 40px;
+    width: 560px;
     heigh: 511px;
     margin: 0 auto;
   }
@@ -21,8 +22,11 @@ export const Icon = styled.img`
 
 export const Title = styled.div`
   color: ${themeColors.blueGray900};
+  font-family: 'Rubik', sans-serif;
+  font-style: normal;
   font-weight: 500;
   font-size: 20px;
+  line-height: 120%;
   ${mediaQuery.sm} {
     font-size: 24px;
   }
@@ -80,6 +84,7 @@ export const Input = {
     padding: 15px 8px 15px 15px;
   `,
   Amount: styled.input`
+    font-family: 'Rubik', sans-serif;
     width: 100%;
     cursor: pointer;
     height: 56px;
@@ -90,8 +95,12 @@ export const Input = {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
+    line-height: 120%;
     color: ${themeColors.blueGray600};
     line-height: 120%;
+    ${mediaQuery.sm} {
+      width: 227px;
+    }
   `
 };
 
@@ -111,7 +120,7 @@ export const CalendarResume = styled.div`
     color: ${themeColors.blueGray300};
   }
   ${mediaQuery.sm} {
-    width: 100%;
+    width: 110px;
   }
 }`;
 
@@ -131,6 +140,9 @@ export const Calendar = styled(DatePicker)`
   color: transparent;
   position: inherit;
   position: absolut;
+  ${mediaQuery.sm} {
+    width: 110px;
+  }
 }`;
 
 export const ArrowLeftButton = styled.button`
@@ -166,7 +178,7 @@ export const CalculatedBox = styled.div`
 export const MonthlyAmount = styled.div`
   display: flex;
   justify-content: space-between;
-  align-itens: center;
+  align-items: center;
   padding: 27px 24px 29px 24px;
   & p {
     color: ${themeColors.blueGray900};
@@ -177,6 +189,7 @@ export const MonthlyAmount = styled.div`
   }
   & div {
     color: ${themeColors.brandColorSecondary}
+    font-family: 'Rubik', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -196,6 +209,8 @@ export const MonthlyAmount = styled.div`
 export const MonthlyAmountResume = styled.div`
   text-align: center;
   background-color:  ${themeColors.blueGray10}
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   & p {
     padding: 24px 32px;
     font-style: normal;
