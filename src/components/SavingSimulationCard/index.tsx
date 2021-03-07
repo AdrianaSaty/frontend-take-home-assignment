@@ -21,6 +21,7 @@ import {
 import house from '../../icons/house.svg';
 import moneySign from '../../icons/moneySign.svg';
 import arrow from '../../icons/arrow.svg';
+import Button from '../Button';
 
 const SavingSimulationCard: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState(new Date());
@@ -83,6 +84,7 @@ const SavingSimulationCard: React.FunctionComponent = () => {
           </p>
         </MonthlyAmountResume>
       </CalculatedBox>
+      <Button>Confirm</Button>
     </Container>
   );
 };
