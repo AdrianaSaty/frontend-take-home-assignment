@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeColors } from '../../globalStyles';
+import { mediaQuery, themeColors } from '../../globalStyles';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -7,6 +7,11 @@ export const Container = styled.div`
   background-color: ${themeColors.white};
   width: 100%;
   padding: 31px 24px 40px 24px;
+  ${mediaQuery.sm} {
+    width: 530px;
+    heigh: 511px;
+    margin: 0 auto;
+  }
 `;
 
 export const Icon = styled.img`
@@ -18,6 +23,9 @@ export const Title = styled.div`
   color: ${themeColors.blueGray900};
   font-weight: 500;
   font-size: 20px;
+  ${mediaQuery.sm} {
+    font-size: 24px;
+  }
 `;
 
 export const Subtitle = styled.div`
@@ -38,9 +46,19 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const Inputs = styled.div`
+  ${mediaQuery.sm} {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
 export const InputTitle = styled.div`
   color: ${themeColors.blueGray900};
   font-size: 12px;
+  ${mediaQuery.sm} {
+    font-size: 14px;
+  }
 `;
 
 export const InputIcon = styled.img`
@@ -92,6 +110,9 @@ export const CalendarResume = styled.div`
     font-weight: 400;
     color: ${themeColors.blueGray300};
   }
+  ${mediaQuery.sm} {
+    width: 100%;
+  }
 }`;
 
 export const CalendarResumeBox = styled.div`
@@ -104,7 +125,6 @@ export const CalendarResumeBox = styled.div`
 
 export const Calendar = styled(DatePicker)`
   border: none;
-  width: calc(100vw - 130px);
   height: 54px;
   top: -53px;
   background-color: transparent;
@@ -146,6 +166,7 @@ export const CalculatedBox = styled.div`
 export const MonthlyAmount = styled.div`
   display: flex;
   justify-content: space-between;
+  align-itens: center;
   padding: 27px 24px 29px 24px;
   & p {
     color: ${themeColors.blueGray900};
@@ -160,6 +181,15 @@ export const MonthlyAmount = styled.div`
     font-weight: 500;
     font-size: 24px;
     line-height: 120%;
+  }
+  ${mediaQuery.sm} {
+    padding: 31px 32px 23px 32px;
+    & p {
+      font-size: 20px;
+    }
+    & div {
+      font-size: 32px;
+    }
   }
 }`;
 
@@ -176,5 +206,8 @@ export const MonthlyAmountResume = styled.div`
   & span {
     font-style: bold;
     font-weight: bold;
+  }
+  ${mediaQuery.sm} {
+    text-align: left;
   }
 }`;

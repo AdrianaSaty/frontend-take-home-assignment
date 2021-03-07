@@ -5,6 +5,7 @@ import {
   Title,
   Subtitle,
   Wrapper,
+  Inputs,
   InputTitle,
   InputBox,
   Input,
@@ -34,34 +35,41 @@ const SavingSimulationCard: React.FunctionComponent = () => {
           <Subtitle>Saving goal</Subtitle>
         </div>
       </Wrapper>
-      <InputTitle>Total amount</InputTitle>
-      <InputBox>
-        <Input.Icon src={moneySign} alt="money sign"></Input.Icon>
-        <Input.Amount type="number"></Input.Amount>
-      </InputBox>
-      <InputTitle>Reach goal by</InputTitle>
-      <InputBox>
-        <ArrowLeftButton>
-          <img src={arrow} alt="arrow left"></img>
-        </ArrowLeftButton>
-        <CalendarResume>
-          <CalendarResumeBox>
-            <p>October</p>
-            <p>2021</p>
-          </CalendarResumeBox>
-          <Calendar
-            selected={selectedDate}
-            dateFormat="MM/yyyy"
-            showMonthYearPicker
-            onChange={date => setStartDate(date)}
-            minDate={startDate}
-            locale="en-GB"
-          />
-        </CalendarResume>
-        <ArrowRightButton>
-          <img src={arrow} alt="arrow left"></img>
-        </ArrowRightButton>
-      </InputBox>
+      <Inputs>
+        <div>
+          <InputTitle>Total amount</InputTitle>
+          <InputBox>
+            <Input.Icon src={moneySign} alt="money sign"></Input.Icon>
+            <Input.Amount type="number"></Input.Amount>
+          </InputBox>
+        </div>
+        <div>
+          <InputTitle>Reach goal by</InputTitle>
+          <InputBox>
+            <ArrowLeftButton>
+              <img src={arrow} alt="arrow left"></img>
+            </ArrowLeftButton>
+            <CalendarResume>
+              <CalendarResumeBox>
+                <p>October</p>
+                <p>2021</p>
+              </CalendarResumeBox>
+              <Calendar
+                selected={selectedDate}
+                dateFormat="MM/yyyy"
+                showMonthYearPicker
+                onChange={date => setStartDate(date)}
+                minDate={startDate}
+                locale="en-GB"
+              />
+            </CalendarResume>
+            <ArrowRightButton>
+              <img src={arrow} alt="arrow left"></img>
+            </ArrowRightButton>
+          </InputBox>
+        </div>
+      </Inputs>
+
       <CalculatedBox>
         <MonthlyAmount>
           <p>Monthly amount</p>
