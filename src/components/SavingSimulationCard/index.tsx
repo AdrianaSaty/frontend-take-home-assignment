@@ -24,8 +24,43 @@ import arrow from '../../icons/arrow.svg';
 import Button from '../Button';
 
 const SavingSimulationCard: React.FunctionComponent = () => {
-  const [startDate, setStartDate] = React.useState(new Date());
+  const startDate = new Date();
   const [selectedDate, setSelectedDate] = React.useState(startDate);
+  const [selectedMonth, setSelectedMonth] = React.useState(
+    selectedDate.toLocaleString('en-us', { month: 'long' })
+  );
+  const [selectedYear, setSelectedYear] = React.useState(
+    selectedDate.getFullYear()
+  );
+
+  const handleSelectedDate = (date: Date) => {
+    setSelectedDate(date);
+    setSelectedMonth(date.toLocaleString('en-us', { month: 'long' }));
+    setSelectedYear(date.getFullYear());
+  };
+
+  const handleMonthChange = (addMonth: number) => {
+    const anoAtual = startDate.getFullYear();
+    const mesAtual = startDate.getMonth();
+    const anoSelecionado = selectedDate.getFullYear();
+    const mesSelecionado = selectedDate.getMonth();
+    if (
+      (anoSelecionado >= anoAtual &&
+        mesSelecionado >= mesAtual &&
+        addMonth > 0) ||
+      (anoSelecionado > anoAtual && addMonth > 0)
+    ) {
+      selectedDate.setMonth(selectedDate.getMonth() + 1);
+    } else if (
+      (anoSelecionado >= anoAtual &&
+        mesSelecionado > mesAtual &&
+        addMonth < 0) ||
+      (anoSelecionado > anoAtual && addMonth < 0)
+    ) {
+      selectedDate.setMonth(selectedDate.getMonth() - 1);
+    }
+    handleSelectedDate(selectedDate);
+  };
 
   return (
     <Container>
@@ -47,24 +82,23 @@ const SavingSimulationCard: React.FunctionComponent = () => {
         <div>
           <InputTitle>Reach goal by</InputTitle>
           <InputBox>
-            <ArrowLeftButton>
+            <ArrowLeftButton onClick={() => handleMonthChange(-1)}>
               <img src={arrow} alt="arrow left"></img>
             </ArrowLeftButton>
             <CalendarResume>
               <CalendarResumeBox>
-                <p>October</p>
-                <p>2021</p>
+                <p>{selectedMonth}</p>
+                <p>{selectedYear}</p>
               </CalendarResumeBox>
               <Calendar
                 selected={selectedDate}
                 dateFormat="MM/yyyy"
                 showMonthYearPicker
-                onChange={date => setStartDate(date)}
+                onChange={date => handleSelectedDate(date)}
                 minDate={startDate}
-                locale="en-GB"
               />
             </CalendarResume>
-            <ArrowRightButton>
+            <ArrowRightButton onClick={() => handleMonthChange(1)}>
               <img src={arrow} alt="arrow left"></img>
             </ArrowRightButton>
           </InputBox>
