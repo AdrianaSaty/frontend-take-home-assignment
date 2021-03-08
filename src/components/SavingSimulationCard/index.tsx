@@ -23,6 +23,7 @@ import house from '../../icons/house.svg';
 import moneySign from '../../icons/moneySign.svg';
 import arrow from '../../icons/arrow.svg';
 import Button from '../Button';
+import formatedMoney from '../../helpers';
 
 const SavingSimulationCard: React.FunctionComponent = () => {
   const startDate = new Date();
@@ -34,11 +35,30 @@ const SavingSimulationCard: React.FunctionComponent = () => {
     selectedDate.toLocaleString('en-us', { month: 'long' })
   );
   const [selectedYear, setSelectedYear] = useState(selectedDate.getFullYear());
+  const [totalAmount, setTotalAmount] = useState('');
+  const [monthlyAmount, setMonthlyAmount] = useState('0');
+  const [totalMonth, setTotalMonth] = useState(1);
+
+  const handleTotalAmountChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTotalAmount(event.target.value);
+  };
+
+  const calculateDifferenceOfMonths = (minDate: Date, maxDate: Date) => {
+    return (
+      maxDate.getMonth() -
+      minDate.getMonth() +
+      12 * (maxDate.getFullYear() - minDate.getFullYear()) +
+      1
+    );
+  };
 
   const handleSelectedDate = (date: Date) => {
     setSelectedDate(date);
     setSelectedMonth(date.toLocaleString('en-us', { month: 'long' }));
     setSelectedYear(date.getFullYear());
+    setTotalMonth(calculateDifferenceOfMonths(new Date(), date));
   };
 
   const handleMonthChange = (addMonth: number) => {
@@ -73,6 +93,10 @@ const SavingSimulationCard: React.FunctionComponent = () => {
     toggleOnKeyUpEventListener(true);
   }, []);
 
+  useEffect(() => {
+    setMonthlyAmount(formatedMoney(parseInt(totalAmount) / totalMonth));
+  });
+
   return (
     <Container>
       <Wrapper>
@@ -89,6 +113,8 @@ const SavingSimulationCard: React.FunctionComponent = () => {
             <Input.Icon src={moneySign} alt="money sign"></Input.Icon>
             <Input.Amount
               type="number"
+              value={totalAmount}
+              onChange={event => handleTotalAmountChange(event)}
               onFocus={() => toggleOnKeyUpEventListener(false)}
               onBlur={() => toggleOnKeyUpEventListener(true)}
             ></Input.Amount>
@@ -122,13 +148,17 @@ const SavingSimulationCard: React.FunctionComponent = () => {
       <CalculatedBox>
         <MonthlyAmount>
           <p>Monthly amount</p>
-          <div>$521</div>
+          <div>${monthlyAmount}</div>
         </MonthlyAmount>
         <MonthlyAmountResume>
           <p>
-            You’re planning <span>48 monthly deposits</span> to reach your
-            <span> $25,000 </span>
-            goal by <span>October 2020.</span>
+            You’re planning <span>{totalMonth} monthly deposits</span> to reach
+            your
+            <span> ${formatedMoney(parseInt(totalAmount))} </span>
+            goal by{' '}
+            <span>
+              {selectedMonth} {selectedYear}.
+            </span>
           </p>
         </MonthlyAmountResume>
       </CalculatedBox>
