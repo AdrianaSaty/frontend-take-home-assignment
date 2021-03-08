@@ -19,9 +19,7 @@ import {
   MonthlyAmount,
   MonthlyAmountResume
 } from './styles';
-import house from '../../icons/house.svg';
-import moneySign from '../../icons/moneySign.svg';
-import arrow from '../../icons/arrow.svg';
+import { arrow, house, moneySign } from '../../icons/';
 import Button from '../Button';
 import formatedMoney from '../../helpers';
 

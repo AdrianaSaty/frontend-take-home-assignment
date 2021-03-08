@@ -1,6 +1,6 @@
-import academy from './academy.svg';
 import arrow from './arrow.svg';
+import house from './house.svg';
 import logo from './logo.svg';
-import tip from './tip.svg';
+import moneySign from './moneySign.svg';
 
-export default { academy, arrow, logo, tip };
+export { arrow, house, logo, moneySign };
