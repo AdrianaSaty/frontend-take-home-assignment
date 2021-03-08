@@ -4,10 +4,8 @@
   "description": "Origin Frontend Challenge",
   "main": "src/index.ts",
   "dependencies": {
-    "@date-io/date-fns": "^2.10.8",
     "@datepicker-react/styled": "^2.8.0",
     "acorn": "^7.1.1",
-    "date-fns": "^2.18.0",
     "react": "^16.13.1",
     "react-datepicker": "^3.6.0",
     "react-dom": "^16.13.1",
