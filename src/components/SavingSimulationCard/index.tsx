@@ -1,3 +1,4 @@
+import { useEffect, useState, useCallback } from 'react';
 import * as React from 'react';
 import {
   Container,
@@ -25,13 +26,14 @@ import Button from '../Button';
 
 const SavingSimulationCard: React.FunctionComponent = () => {
   const startDate = new Date();
-  const [selectedDate, setSelectedDate] = React.useState(startDate);
-  const [selectedMonth, setSelectedMonth] = React.useState(
+  const startDateInDays = (startDate.getTime() / (1000 * 60 * 60 * 24)).toFixed(
+    0
+  );
+  const [selectedDate, setSelectedDate] = useState(startDate);
+  const [selectedMonth, setSelectedMonth] = useState(
     selectedDate.toLocaleString('en-us', { month: 'long' })
   );
-  const [selectedYear, setSelectedYear] = React.useState(
-    selectedDate.getFullYear()
-  );
+  const [selectedYear, setSelectedYear] = useState(selectedDate.getFullYear());
 
   const handleSelectedDate = (date: Date) => {
     setSelectedDate(date);
@@ -40,12 +42,11 @@ const SavingSimulationCard: React.FunctionComponent = () => {
   };
 
   const handleMonthChange = (addMonth: number) => {
-    const selectedDateInDays = Math.floor(
-      selectedDate.getTime() / (1000 * 60 * 60 * 24)
-    );
-    const startDateInDays = Math.floor(
-      startDate.getTime() / (1000 * 60 * 60 * 24)
-    );
+    const selectedDateInDays = (
+      selectedDate.getTime() /
+      (1000 * 60 * 60 * 24)
+    ).toFixed(0);
+
     if (selectedDateInDays >= startDateInDays && addMonth > 0) {
       selectedDate.setMonth(selectedDate.getMonth() + 1);
     } else if (selectedDateInDays > startDateInDays && addMonth < 0) {
@@ -53,6 +54,24 @@ const SavingSimulationCard: React.FunctionComponent = () => {
     }
     handleSelectedDate(selectedDate);
   };
+
+  const onKeyUp = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'ArrowRight') {
+      handleMonthChange(1);
+    } else if (event.key === 'ArrowLeft') {
+      handleMonthChange(-1);
+    }
+  }, []);
+
+  const toggleOnKeyUpEventListener = (listener: boolean) => {
+    listener
+      ? window.addEventListener('keyup', onKeyUp)
+      : window.removeEventListener('keyup', onKeyUp);
+  };
+
+  useEffect(() => {
+    toggleOnKeyUpEventListener(true);
+  }, []);
 
   return (
     <Container>
@@ -68,7 +87,11 @@ const SavingSimulationCard: React.FunctionComponent = () => {
           <InputTitle>Total amount</InputTitle>
           <InputBox>
             <Input.Icon src={moneySign} alt="money sign"></Input.Icon>
-            <Input.Amount type="number"></Input.Amount>
+            <Input.Amount
+              type="number"
+              onFocus={() => toggleOnKeyUpEventListener(false)}
+              onBlur={() => toggleOnKeyUpEventListener(true)}
+            ></Input.Amount>
           </InputBox>
         </div>
         <div>
@@ -91,12 +114,11 @@ const SavingSimulationCard: React.FunctionComponent = () => {
               />
             </CalendarResume>
             <ArrowRightButton onClick={() => handleMonthChange(1)}>
-              <img src={arrow} alt="arrow left"></img>
+              <img src={arrow} alt="arrow right"></img>
             </ArrowRightButton>
           </InputBox>
         </div>
       </Inputs>
-
       <CalculatedBox>
         <MonthlyAmount>
           <p>Monthly amount</p>
