@@ -140,6 +140,7 @@ export const Calendar = styled(DatePicker)`
   color: transparent;
   position: inherit;
   position: absolut;
+  width: calc(100vw - 130px);
   ${mediaQuery.sm} {
     width: 110px;
   }
